@@ -1,0 +1,66 @@
+﻿@model IEnumerable<MasterRadMM.ViewModels.TransactionListItemViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Reciever)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SendingDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Reciever)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SendingDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @if(item.Status == "Waiting")
+                {
+                    @Html.ActionLink("Begin |", "Begin", new { Id = item.Id }); 
+                }
+                else
+                {
+                    @Html.ActionLink("Update |", "Update", new { Id = item.Id });
+                }
+                @Html.ActionLink("Details", "Details", new { Id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { Id = item.Id })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
